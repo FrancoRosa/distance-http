@@ -2,8 +2,8 @@
 #include <ESP8266WiFi.h>
 #include <SoftwareSerial.h>
 
-#define rxPin 15
-#define txPin 13
+#define rxPin 13
+#define txPin 12
 #define alive 2
 
 // Ultrasonic Distance Sensor Reading for ESP8266
@@ -45,6 +45,7 @@ void handleNotFound() {
 void setup() {
   pinMode(alive, OUTPUT);
   digitalWrite(alive, LOW);
+  delay(3000);
 
   Serial.begin(115200);
   btSerial.begin(9600, SWSERIAL_8N1, rxPin, txPin, false);
@@ -56,7 +57,9 @@ void setup() {
       delay(1000);
     }
   }
-  Serial.println("...Start");
+  Serial.println("...pre start");
+  delay(3000);
+  Serial.println("... start");
 
   WiFi.mode(WIFI_STA);
   if (!WiFi.config(local_IP, gateway, subnet, primaryDNS, secondaryDNS)) {
